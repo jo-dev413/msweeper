@@ -44,11 +44,13 @@ class ThreadTest extends JFrame implements Runnable{
 
 	  public void run(){
 
-		  MyTimer time = new MyTimer();
+		  MyTimer time;
 		  
 		  msweeperBoard board;
 		  
 		  while(true) {
+			 
+			time = new MyTimer();
 			
 			time.start();
 			  
@@ -81,6 +83,10 @@ class ThreadTest extends JFrame implements Runnable{
 			this.remove(board);
 			
 			msweeperScore msc = new msweeperScore();
+			
+			msc.makeHighScorStr(100);
+			msc.makeTimeStr(time.getTime());
+			msc.makePanel();
 			
 			this.add(msc);
 			
