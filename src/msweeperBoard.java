@@ -8,11 +8,33 @@ import java.util.Collections;
 
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author joe-c
+ *
+ */
 public class msweeperBoard extends JPanel implements GameObject{
-	
+	/**
+	 * 
+	 */
+	private int blockClosed;
+	/**
+	 * 
+	 */
+	private int bomNum;
+	/**
+	 * 
+	 */
 	msweeperBlock map[][] = new msweeperBlock[8][8];
+	
+	/**
+	 * 
+	 */
 	private boolean gameState;
 	
+	/**
+	 * 
+	 */
 	msweeperBoard(){
 		super();
 		GridLayout layout = new GridLayout(8,8);
@@ -24,14 +46,28 @@ public class msweeperBoard extends JPanel implements GameObject{
 		this.gameState = true;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean getGameState() {
 		return gameState;
 	}
 	
+	/**
+	 * 
+	 */
 	public void setGameStateEnd() {
 		this.gameState = false;
 	}
 	
+	public void clear() {
+		this.removeAll();
+	}
+	
+	/**
+	 * 
+	 */
 	private void setButton(){
 		for(int i = 0;i < 8;i++) {
 			for(int j = 0;j < 8;j++) {
@@ -44,6 +80,9 @@ public class msweeperBoard extends JPanel implements GameObject{
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	private void setBom() {
 		ArrayList <Boolean> bom = new ArrayList<>();
 		for(int i = 0;i < 10;i++) {
@@ -55,7 +94,6 @@ public class msweeperBoard extends JPanel implements GameObject{
 		
 		Collections.shuffle(bom);
 		
-		System.out.println(bom);
 		for(int i = 0,index = 0;i < 8;i++) {
 			for(int j = 0;j < 8;j++,index++) {
 				if(bom.get(index)) {
@@ -65,6 +103,9 @@ public class msweeperBoard extends JPanel implements GameObject{
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	private void setNum() {
 		for(int i = 0;i < 8;i++) {
 			for(int j = 0;j < 8;j++){
@@ -75,6 +116,11 @@ public class msweeperBoard extends JPanel implements GameObject{
 		}
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	private void makeNum(int x,int y) {
 		for(int i = 0;i < 8;i++) {
 			if(x + peripheralBlockX[i] >= 0 && y + peripheralBlockY[i] >= 0 && x + peripheralBlockX[i] < 8 && y + peripheralBlockY[i] < 8){
@@ -83,6 +129,11 @@ public class msweeperBoard extends JPanel implements GameObject{
 		}
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void openBlock(int x,int y) {
         if (!(inLenge(x,y))) return;
         map[x][y].open();
@@ -96,6 +147,12 @@ public class msweeperBoard extends JPanel implements GameObject{
         }
     }
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	private boolean inLenge(int x,int y) {
 		if(x >= 0 && x < 8) {
 			if(y >= 0 && y < 8) {

@@ -6,14 +6,43 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class msweeperBlock extends JButton implements Image_path,ActionListener {
-	
+/**
+ * 
+ * @author joe-c
+ *
+ */
+public class msweeperBlock extends JButton implements ActionListener {
+	/**
+	 * 
+	 */
 	private int x,y;
+	
+	/**
+	 * 
+	 */
 	private boolean bom;
+	
+	/**
+	 * 
+	 */
 	private int num;
+	
+	/**
+	 * 
+	 */
 	private boolean state;
+	
+	/**
+	 * 
+	 */
 	private msweeperBoard board;
 	
+	/**
+	 * 
+	 * @param board
+	 * @param x
+	 * @param y
+	 */
 	msweeperBlock(msweeperBoard board,int x,int y){
 		super();
 		bom = false;
@@ -25,19 +54,32 @@ public class msweeperBlock extends JButton implements Image_path,ActionListener 
 		this.addActionListener(this);
 	}
 	
+	/**
+	 * 
+	 */
 	public void actionPerformed(ActionEvent e){
 		this.open();
 		board.openBlock(this.x, this.y);
 	}
 	
+	/**
+	 * 
+	 */
 	public void numAdder() {
 		this.num++;
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean getBomFlag() {
 		return this.bom;
 	}
 	
+	/**
+	 * 
+	 */
 	public void open() {
 		state = true;
 		this.setEnabled(false);
@@ -49,16 +91,26 @@ public class msweeperBlock extends JButton implements Image_path,ActionListener 
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean getState() {
 		return state;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getNum() {
 		return num;
 	}
 	
+	/**
+	 * 
+	 */
 	public void setBom() {
 		this.bom = true;
-		this.setText("BOM");
 	}
 }
