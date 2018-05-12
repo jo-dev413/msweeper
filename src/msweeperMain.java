@@ -5,11 +5,13 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.event.ActionListener;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 /**
  * 
@@ -41,11 +43,15 @@ class ThreadTest extends JFrame implements Runnable{
 	  }
 
 	  public void run(){
+
+		  MyTimer time = new MyTimer();
 		  
 		  msweeperBoard board;
 		  
 		  while(true) {
 			
+			time.start();
+			  
 			board = new msweeperBoard();
 			
 			this.add(board);
@@ -56,13 +62,17 @@ class ThreadTest extends JFrame implements Runnable{
 			
 			while(board.getGameState()){
 				repaint();
-			}	
+			}
+			time.TimerStop();
+			
 			try {
 				thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			System.out.println(time.getTime());
 			
 			board.clear();
 			
