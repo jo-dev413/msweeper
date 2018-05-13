@@ -10,18 +10,23 @@ import javax.swing.JPanel;
 
 /**
  * 
- * @author joe-c
+ * @author jo
  *
  */
 public class msweeperBoard extends JPanel implements GameObject{
+	
 	/**
 	 * 
 	 */
-	private int blockClosed;
+	int openBlock;
+	
 	/**
 	 * 
 	 */
-	private int bomNum;
+	boolean clearFlag;
+	
+	int bomnum;
+	
 	/**
 	 * 
 	 */
@@ -35,15 +40,18 @@ public class msweeperBoard extends JPanel implements GameObject{
 	/**
 	 * 
 	 */
-	msweeperBoard(){
+	msweeperBoard(int len,int bom){
 		super();
 		GridLayout layout = new GridLayout(8,8);
 		this.setLayout(layout);
 		this.setPreferredSize(new Dimension(400,400));
 		setButton();
+		this.bomnum = bom;
 		setBom();
 		setNum();
 		this.gameState = true;
+		this.openBlock = 0;
+		this.clearFlag = false;
 	}
 	
 	/**
@@ -54,11 +62,20 @@ public class msweeperBoard extends JPanel implements GameObject{
 		return gameState;
 	}
 	
+	public boolean getGameClear() {
+		return clearFlag;
+	}
+	
 	/**
 	 * 
 	 */
 	public void setGameStateEnd() {
 		this.gameState = false;
+		for(int i = 0;i < 8;i++) {
+			for(int j = 0;j < 8;j++) {
+				map[i][j].setClickOK(false); 
+			}
+		}
 	}
 	
 	public void clear() {
@@ -85,10 +102,10 @@ public class msweeperBoard extends JPanel implements GameObject{
 	 */
 	private void setBom() {
 		ArrayList <Boolean> bom = new ArrayList<>();
-		for(int i = 0;i < 10;i++) {
+		for(int i = 0;i < bomnum;i++) {
 			bom.add(true);
 		}
-		for(int i = 0;i < 54;i++) {
+		for(int i = 0;i < 64-bomnum;i++) {
 			bom.add(false);
 		}
 		
@@ -137,6 +154,8 @@ public class msweeperBoard extends JPanel implements GameObject{
 	public void openBlock(int x,int y) {
         if (!(inLenge(x,y))) return;
         map[x][y].open();
+        this.openBlock++;
+        this.gameCon();
         if(map[x][y].getNum() == 0 && map[x][y].getBomFlag() == false) {
             for(int i = 0;i < 8;i++) {
                 int cx = x + peripheralBlockX[i], cy = y + peripheralBlockY[i];
@@ -146,6 +165,13 @@ public class msweeperBoard extends JPanel implements GameObject{
             }
         }
     }
+	
+	private void gameCon() {
+		if(this.openBlock == 64-bomnum) {
+			this.clearFlag = true;
+			this.setGameStateEnd();
+		}
+	}
 	
 	/**
 	 * 

@@ -16,88 +16,18 @@ import javax.swing.Timer;
 /**
  * 
  * @author jo
+ *　Mainクラス。
  *
  */
 public class msweeperMain {
 	/**
+	 * @param args
 	 * mainメソッド
 	 * プログラム実行時に呼び出されるメソッド。
 	 * このメソッドが終了するとプログラム自体も終了する。
-	 * @param args
 	 */
-	public static void main(String args[]){
-		ThreadTest test = new ThreadTest();
-		test.init();
+	public static void main(String[] args){
+		ViewThread view = new ViewThread();
+		view.init(Integer.parseInt(args[0]),Integer.parseInt(args[1]));
 	}
-}
-
-class ThreadTest extends JFrame implements Runnable{
-	  Thread thread = null;
-
-	  public void init(){
-		this.setBounds(0, 0, 400, 400);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    
-		thread = new Thread(this);
-	    thread.start();
-	  }
-
-	  public void run(){
-
-		  MyTimer time;
-		  
-		  msweeperBoard board;
-		  
-		  while(true) {
-			 
-			time = new MyTimer();
-			
-			time.start();
-			  
-			board = new msweeperBoard();
-			
-			this.add(board);
-			
-			this.setVisible(true);
-			
-			this.repaint();
-			
-			while(board.getGameState()){
-				repaint();
-			}
-			time.TimerStop();
-			
-			try {
-				thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			System.out.println(time.getTime());
-			
-			board.clear();
-			
-			this.repaint();
-			
-			this.remove(board);
-			
-			msweeperScore msc = new msweeperScore();
-			
-			msc.makeHighScorStr(100);
-			msc.makeTimeStr(time.getTime());
-			msc.makePanel();
-			
-			this.add(msc);
-			
-			try {
-				thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			remove(msc);
-		  }
-	  }
 }

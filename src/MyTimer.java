@@ -1,19 +1,26 @@
 package msweeper;
 
+/**
+ * 
+ * @author jo
+ * 1秒経過をカウントするタイマー機能を持つ。
+ * 別スレッドで動作する。
+ */
 public class MyTimer extends Thread {
 	
 	/**
-	 * 
+	 * trueのとき時間計測許可
+	 * falseのときは時間計測を行わない
 	 */
-	boolean countFlag;
+	private boolean countFlag;
 	
 	/**
-	 * 
+	 * 経過時間を保持
 	 */
-	long time;
+	private long time;
 	
 	/**
-	 * 
+	 * フィールド変数を初期化
 	 */
 	MyTimer(){
 		countFlag = true;
@@ -21,7 +28,7 @@ public class MyTimer extends Thread {
 	}
 	
 	/**
-	 * 
+	 * 	一秒ごとに変数timeをインクリメントする
 	 */
     public void run() {
     	while(countFlag) {
@@ -34,7 +41,7 @@ public class MyTimer extends Thread {
     }
 	
     /**
-     * 
+     * countFlagをfalseにすることによって時間計測をストップする
      */
 	public void TimerStop() {
 		countFlag = false;
@@ -42,7 +49,9 @@ public class MyTimer extends Thread {
 	
 	/**
 	 * 
-	 * @return
+	 * .計測時間を戻り値とする
+	 * 
+	 * @return　計測時間
 	 */
 	public long getTime() {
 		return time;

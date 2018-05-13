@@ -37,6 +37,8 @@ public class msweeperBlock extends JButton implements ActionListener {
 	 */
 	private msweeperBoard board;
 	
+	private boolean clickOK;
+	
 	/**
 	 * 
 	 * @param board
@@ -48,6 +50,7 @@ public class msweeperBlock extends JButton implements ActionListener {
 		bom = false;
 		num = 0;
 		state = false;
+		this.clickOK = true;
 		this.board = board;
 		this.x = x;
 		this.y = y;
@@ -81,13 +84,15 @@ public class msweeperBlock extends JButton implements ActionListener {
 	 * 
 	 */
 	public void open() {
-		state = true;
-		this.setEnabled(false);
-		if(this.bom) {
-			this.setText("M");
-			board.setGameStateEnd();
-		}else if(num != 0){
-			this.setText(Integer.toString(num));
+		if(this.clickOK) {
+			state = true;
+			this.setEnabled(false);
+			if(this.bom) {
+				this.setText("M");
+				board.setGameStateEnd();
+			}else if(num != 0){
+				this.setText(Integer.toString(num));
+			}
 		}
 	}
 	
@@ -112,5 +117,9 @@ public class msweeperBlock extends JButton implements ActionListener {
 	 */
 	public void setBom() {
 		this.bom = true;
+	}
+
+	public void setClickOK(boolean b) {
+		this.clickOK = b;
 	}
 }
