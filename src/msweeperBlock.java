@@ -8,42 +8,47 @@ import javax.swing.JButton;
 
 /**
  * 
- * @author joe-c
- *
+ * @author jo
+ * msweeperBoardの1マスに配置されるJButtonを継承したオブジェクト。
+ * 
  */
 public class msweeperBlock extends JButton implements ActionListener {
+	
 	/**
-	 * 
+	 *	インスタンス化されたオブジェクトの座標 
 	 */
 	private int x,y;
 	
 	/**
-	 * 
+	 * Mを持っているか
 	 */
 	private boolean bom;
 	
 	/**
-	 * 
+	 * Mの周りにあった場合に表示される数
 	 */
 	private int num;
 	
 	/**
-	 * 
+	 * ボタンが押されているかどうか
 	 */
 	private boolean state;
 	
 	/**
-	 * 
+	 * コールバック先
 	 */
 	private msweeperBoard board;
 	
+	/**
+	 * クリック可能かどうか
+	 */
 	private boolean clickOK;
 	
 	/**
-	 * 
-	 * @param board
-	 * @param x
-	 * @param y
+	 * 変数の初期化とアクションリスナーの追加
+	 * @param board　コールバック先
+	 * @param x　座標X
+	 * @param y　座標Y
 	 */
 	msweeperBlock(msweeperBoard board,int x,int y){
 		super();
@@ -58,7 +63,8 @@ public class msweeperBlock extends JButton implements ActionListener {
 	}
 	
 	/**
-	 * 
+	 * プレス検出
+	 * 検出後コールバック
 	 */
 	public void actionPerformed(ActionEvent e){
 		this.open();
@@ -73,15 +79,19 @@ public class msweeperBlock extends JButton implements ActionListener {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * bomのゲッター
+	 * @return　自身がMかどうか
 	 */
 	public boolean getBomFlag() {
 		return this.bom;
 	}
 	
 	/**
-	 * 
+	 * 自身のマス目を開く
+	 * 開いたときに状態を表す文字を表示
+	 * 爆弾　　  ： M
+	 * Mの周囲  ： Mの数に応じた数字
+	 * その他　   ： 空文字
 	 */
 	public void open() {
 		if(this.clickOK) {
@@ -97,28 +107,32 @@ public class msweeperBlock extends JButton implements ActionListener {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * stateのゲッター
+	 * @return　プレス済みかどうか
 	 */
 	public boolean getState() {
 		return state;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * numのゲッター
+	 * @return　周囲のMの数
 	 */
 	public int getNum() {
 		return num;
 	}
 	
 	/**
-	 * 
+	 * bomのセッター
 	 */
 	public void setBom() {
 		this.bom = true;
 	}
 
+	/**
+	 * clickOKのセッター
+	 * @param b　プレスの許可or禁止
+	 */
 	public void setClickOK(boolean b) {
 		this.clickOK = b;
 	}

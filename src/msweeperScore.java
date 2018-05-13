@@ -40,6 +40,9 @@ public class msweeperScore extends JPanel{
 	 */
 	private String strHead = "<html><body><br/>";
 	
+	/**
+	 * ゲームオーバした際に表示する文字列
+	 */
 	private String gameover = "<center>GAME OVER</center><br>";
 	
 	/**
@@ -80,12 +83,18 @@ public class msweeperScore extends JPanel{
 		this.highScoreStr += "秒</center><br/><br/>";
 	}	
 	
+	/**
+	 * ゲームをクリアした際に使用する文字列を生成
+	 */
 	public void makePanelClear() {
 		String view = this.strHead + this.timeStr + this.highScoreStr + this.strEnd;
 		JLabel label1 = new JLabel(view);
 		this.add(label1);
 	}
 	
+	/**
+	 * ゲームオーバした際に使用する文字列を生成
+	 */
 	public void makePanelFalse() {
 		String view = this.strHead + this.gameover + this.strEnd;
 		JLabel label1 = new JLabel(view);

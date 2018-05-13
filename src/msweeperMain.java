@@ -17,7 +17,8 @@ import javax.swing.Timer;
  * 
  * @author jo
  *　Mainクラス。
- *
+ *　コマンドラインからゲームのフィールドサイズとMの数を受け取る
+ *　その後描画スレッドを立ち上げる。
  */
 public class msweeperMain {
 	/**
